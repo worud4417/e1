@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<listener>
+		<listener-class>jdbc.DBCPInitListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>poolConfig</param-name>
+		<param-value>
+			jbcdriver=com.mysql.jdbc.Driver
+			dbUser=test1
+			dbPass=test1
+			validationQuery=select 1
+			minIdle=3
+			maxTotal=30
+			poolName=test1
+		</param-value>
+	</context-param>
+	
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>util.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>LoginCheckFilter</filter-name>
+		<filter-class>filter.LoginCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginCheckFilter</filter-name>
+		<url-pattern>/changPwd.do</url-pattern>
+		<url-pattern>/write.do</url-pattern>
+		<url-pattern>/modify.do</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>ControllerUsingFile</servlet-name>
+		<servlet-class>mvc.command.ControllerUsingFile</servlet-class>
+		<init-param>
+			<param-name>configFile</param-name>
+			<param-value>
+				/WEB-INF/commandHandlerURI.properties
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ControllerUsingFile</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+</web-app>
