@@ -10,7 +10,7 @@
 <body>
 <h1>Hello People!</h1>
 <c:if test="${empty userLogin}">
-	<form action="login.do">
+	<form action="login.do" method="post">
 		<p>ID : <input type="text" size="20" name="id"></p>
 		<p>PASSWORD : <input type="password" size="20" name="password"></p>
 		<input type="submit" value="제출">

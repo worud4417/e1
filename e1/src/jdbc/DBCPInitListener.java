@@ -14,15 +14,6 @@ public class DBCPInitListener implements ServletContextListener{
 		// TODO Auto-generated method stub
 		ServletContextListener.super.contextInitialized(sce);
 		
-		String poolConfig = sce.getServletContext().getInitParameter("poolConfig");
-		Properties prop = new Properties();
-		
-		try {
-			prop.load(new StringReader(poolConfig));
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
 		loadJDBCDriver();
 	}
 	
